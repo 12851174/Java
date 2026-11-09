@@ -2,15 +2,26 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Grid extends JPanel{
-    //int rows, columns;
+    int rows, columns, width, height;
+    Box[][] grid;
 
     public Grid(int rows, int cols){
-        int width = 1920/cols;
-        int height = 1080/rows;
-        Box[][] grid = new Box[rows][cols];
+        width = 1920/cols;
+        height = 1080/rows;
+        grid = new Box[rows][cols];
+
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < columns; j++){
+                grid[i][j] = new Box(i * width, j * height, width, height);
+            }
+        }
     }
 
     public void paintComponent(Graphics g){
-        super.paintComponent(g);
+        for(Box[] arr : grid){
+            for(Box box : arr){
+                box.draw(g);
+            }
+        }
     }
 }
